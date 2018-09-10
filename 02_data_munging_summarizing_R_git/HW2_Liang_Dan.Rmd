@@ -1,0 +1,125 @@
+---
+title: "HW2_Liang_Dan"
+author: "Dan Liang"
+date: "9/5/2018"
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 1
+
+## Problem 2
+
+## Problem 3
+
+   complete
+
+
+
+
+
+## Problem 4
+
+1. Vesion control can help us hanlding changes, for example, undo the content we mistakely deleted.
+2. Version control storing member's code online for the whole group of members to have access the code. Once one member change the code or submit new function, the version will be updated and the online system will keep the old version in the repository and have the new one, so all members of course project group can get to know that you update your work and have access to check your work. 
+3. I can try new code at the same time save the older version. If the new one does not work, just revert it.
+4. Through checking the old versions of the code to find out when and where bugs were intruduced, so helps to avoid those next time.
+
+## Problem 5
+```{r}
+mydata5a <- read.csv('~/Desktop/5a.csv')
+library(dplyr)
+cran1 <- tbl_df(mydata5a)
+cran1
+summary (cran1)
+
+mydata5b <- read.csv('~/Desktop/5b.csv')
+library(dplyr)
+cran2 <- tbl_df(mydata5b)
+cran2
+summary(cran2)
+
+mydata5c <- read.csv('~/Desktop/5c.csv')
+library(dplyr)
+cran3 <- tbl_df(mydata5c)
+cran3
+summary(cran3)
+
+mydata5d <- read.csv('~/Desktop/5d.csv')
+library(dplyr)
+cran4 <- tbl_df(mydata5d)
+cran4
+summary(cran4)
+```
+
+
+## Problem 6
+```{r}
+library(swirl)
+# Path to data
+.datapath <- file.path(path.package('swirl'), 'Courses', 'R_Programming_E', 'Looking_at_Data','plant-data.txt')
+# Read in data
+plants <- read.csv(.datapath, strip.white=TRUE, na.strings="")
+str (plants)
+# remove NA in ph_Min and ph_Max
+plantcleaned<-filter(plants, !is.na(plants$pH..Minimum) & !is.na(plants$pH..Maximum))
+# get mean of ph max and ph min
+meanofph <- 2/(plantcleaned$pH..Maximum+plantcleaned$pH..Minimum)
+# Use function lm to test for a relationship
+fit <- lm(meanofph ~ plantcleaned$Foliage.Color)
+
+summary(fit)
+
+```
+## Problem 7
+
+### Problem 7a-d
+
+```{r}
+# read data Personal:Personal car details; ODefects: observed defects; DetailsD: Defect Details (dataset has been saved and load in R)
+# Personal <- read.csv('~/Desktop/Personal.csv')
+# ODefects <- read.csv('~/Desktop/Defects.csv')
+# DetailsD <- read.csv('~/Desktop/Details.csv')
+
+# Merge firt two datasets by licenses 
+# mergebylicense <- merge (Personal,ODefects, by=("Kenteken"))
+# Merge the defects details in
+# mergebycode <- merge (mergebylicense,DetailsD, by=("Gebrek.identificatie"))
+
+# Remove all NA
+# mergecars<- na.omit (mergebycode)
+
+# 5c.count how many different makes and models of cars in 2017
+# install.packages('plyr')
+# library (plyr)
+```
+
+```{r}
+# get subset 2017
+# defectssubset<- subset (mergecars, mergecars$Meld.datum.door.keuringsinstantie>20170000 & mergecars$Meld.datum.door.keuringsinstantie<20180000)
+# problem 7d, get different makes and models of cars 
+# length(unique(defectssubset$Merk))
+# length(unique(defectssubset$Handelsbenaming))
+# There are 137 types of makes in 2017. There are 2938 types of models in 2017
+```
+
+### Problem 7e. 
+```{r}
+# summary (defectssubset)
+```
+
+1. According to the summary of defects in 2017, top five defects are AC1 205 K04 476 210, and the top five models have the defect are AC1 are PEUGEOT, OPEL, VOLKSWAGENM, CITROEN, VOLVO. The top models have the defect AC1 are GOLF, 207, CORSA, POLP, TOYOTA AYGO; 
+
+
+
+### Problem 7h. 
+
+1.clean each dataset remove the NA first, then merge would save some times; 
+2.try each operation in R script before directly knit the R markdown
+
+
+
