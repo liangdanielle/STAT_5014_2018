@@ -31,7 +31,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Problem 5
 ```{r}
-<<<<<<< HEAD
 # 5a
 library(dplyr)
 library(tidyr)
@@ -95,31 +94,6 @@ url<-"http://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/tomato.dat"
 # table
 knitr::kable(summary(Tomato_cleaned), caption="Tomato")
 
-=======
-mydata5a <- read.csv('~/Desktop/5a.csv')
-library(dplyr)
-cran1 <- tbl_df(mydata5a)
-cran1
-summary (cran1)
-
-mydata5b <- read.csv('~/Desktop/5b.csv')
-library(dplyr)
-cran2 <- tbl_df(mydata5b)
-cran2
-summary(cran2)
-
-mydata5c <- read.csv('~/Desktop/5c.csv')
-library(dplyr)
-cran3 <- tbl_df(mydata5c)
-cran3
-summary(cran3)
-
-mydata5d <- read.csv('~/Desktop/5d.csv')
-library(dplyr)
-cran4 <- tbl_df(mydata5d)
-cran4
-summary(cran4)
->>>>>>> f066c9f3080b50e46525a465748ebfc74d4a05df
 ```
 
 
@@ -140,7 +114,7 @@ fit <- lm(meanofph ~ plantcleaned$Foliage.Color)
 
 summary(fit)
 
-<<<<<<< HEAD
+
 # Use ANOVA 
 fit1 <- aov(meanofph ~ plantcleaned$Foliage.Color)
 summary(fit1)
@@ -152,7 +126,7 @@ summary(fit1)
 
 ```{r}
 # read data Personal:Personal car details; ODefects: observed defects; DetailsD: Defect Details (dataset has been saved and load in R using the codes displayed below)
-=======
+
 ```
 ## Problem 7
 
@@ -160,16 +134,15 @@ summary(fit1)
 
 ```{r}
 # read data Personal:Personal car details; ODefects: observed defects; DetailsD: Defect Details (dataset has been saved and load in R)
->>>>>>> f066c9f3080b50e46525a465748ebfc74d4a05df
+
 # Personal <- read.csv('~/Desktop/Personal.csv')
 # ODefects <- read.csv('~/Desktop/Defects.csv')
 # DetailsD <- read.csv('~/Desktop/Details.csv')
 
-<<<<<<< HEAD
+
 # Merge firt two datasets by licenses (has been merged using the codes displayed below)
-=======
-# Merge firt two datasets by licenses 
->>>>>>> f066c9f3080b50e46525a465748ebfc74d4a05df
+
+
 # mergebylicense <- merge (Personal,ODefects, by=("Kenteken"))
 # Merge the defects details in
 # mergebycode <- merge (mergebylicense,DetailsD, by=("Gebrek.identificatie"))
@@ -177,16 +150,14 @@ summary(fit1)
 # Remove all NA
 # mergecars<- na.omit (mergebycode)
 
-<<<<<<< HEAD
 # 5c.count how many different makes and models of cars in 2017, first get subsets of 2017
-=======
-# 5c.count how many different makes and models of cars in 2017
->>>>>>> f066c9f3080b50e46525a465748ebfc74d4a05df
+
+
 # install.packages('plyr')
 # library (plyr)
 ```
 
-<<<<<<< HEAD
+
 
 ### Problem 7d
 ```{r}
@@ -197,7 +168,7 @@ summary(fit1)
 # length(unique(defectssubset$Handelsbenaming))
 ```
     There are 137 types of makes in 2017. There are 2938 types of models in 2017
-=======
+
 ```{r}
 # get subset 2017
 # defectssubset<- subset (mergecars, mergecars$Meld.datum.door.keuringsinstantie>20170000 & mergecars$Meld.datum.door.keuringsinstantie<20180000)
@@ -206,20 +177,19 @@ summary(fit1)
 # length(unique(defectssubset$Handelsbenaming))
 # There are 137 types of makes in 2017. There are 2938 types of models in 2017
 ```
->>>>>>> f066c9f3080b50e46525a465748ebfc74d4a05df
+
+
 
 ### Problem 7e. 
 ```{r}
 # summary (defectssubset)
 ```
 
-<<<<<<< HEAD
+
 1. According to the summary of defects in 2017, top five defects are AC1 205 K04 476 210. Also can use sort function to rank the defects.
 2. the top five models have the defect are AC1 are PEUGEOT, OPEL, VOLKSWAGENM, CITROEN, VOLVO. The top models have the defect are GOLF, 207, CORSA, POLP, TOYOTA AYGO; 
-=======
-1. According to the summary of defects in 2017, top five defects are AC1 205 K04 476 210, and the top five models have the defect are AC1 are PEUGEOT, OPEL, VOLKSWAGENM, CITROEN, VOLVO. The top models have the defect AC1 are GOLF, 207, CORSA, POLP, TOYOTA AYGO; 
 
->>>>>>> f066c9f3080b50e46525a465748ebfc74d4a05df
+
 
 
 ### Problem 7h. 
