@@ -1,0 +1,96 @@
+---
+title: "HW4_Liang_Dan"
+author: "Dan Liang"
+date: "9/15/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# Problem 3
+
+1. show comparison from different aspects.
+2. show causality, mechanism. explanation, and systematic structure. Different factors could be 
+3. connected to explain one phenomena.
+4. show multivariate data. It may uncover unexpected relationships with more features.
+5. integrate different evidence to a graphic.
+6. describe and document the evidence. A graphic should tell a complete story by itself.
+7. present graphics with high-quality conten
+
+# Problem 4
+
+## 1.
+```{r,echo=FALSE}
+library(ggplot2)
+library(ggExtra)
+library(MASS)
+
+library(ggplot2)
+library(tidyr)
+knitr::opts_chunk$set(echo = TRUE)
+
+a <- read.csv("~/Desktop/HW4_data_1.csv")
+b <- read.csv("~/Desktop/HW4_data_2.csv")
+rawdata <- rbind(a,b)
+summary(rawdata)
+```
+## 2.
+
+The factors below will be presented:
+1.block: groups of experiment trials
+2.depth: one measurement
+3.phosphate: one measurement
+
+## 3.
+
+```{r,echo=FALSE}
+# create multipanel
+CleanedData <- gather(rawdata,type,value = measurement, depth,phosphate)
+CleanedData_n <- transform(CleanedData, block = as.factor(block))
+CleanedData_n <- transform(CleanedData_n, type = as.factor(type))
+ggplot(CleanedData_n, aes(x=block, y=measurement, fill=type))+geom_boxplot()
+c <- data.frame(cbind(a$depth ,b$phosphate))
+# scatterBarNorm(c, xlab=expression(italic(depth),ylab=expression(italic(phosphate))
+```
+
+```{r,echo=FALSE}
+# create multipanel
+attach(rawdata)
+layout(matrix(c(1,1,2,3),2,2, byrow= TRUE))
+hist (rawdata$depth, main="Hist of depth", xlab="depth", ylab="freq")
+hist (rawdata$phosphate, main="Hist of phosphate", xlab="phosphate")
+hist (rawdata$block, main="Hist of block", xlab="block", ylab="freq")
+```
+
+## 4.
+
+```{r,echo=FALSE}
+pairs(rawdata)
+```
+
+
+## 5
+
+The block is not an output of an experiment, it is how manipulate the experiment. Two meastures follow normal distribution.
+
+
+# Problem 5
+
+```{r,echo=FALSE}
+library (ggplot2)
+# p <- ggplot(X, aes(X1, X2)) + geom_point() + theme_classic()
+   # ggMarginal(p, X, type = "histogram", yparams=list(colour="orange"))
+
+a <- read.csv("~/Desktop/HW4_data.csv") 
+# plot(a$depth, a$phosphate, main= "Plot of a", xlab="depth", ylab="phosphate") 
+p<- ggplot(a, aes(a$depth, a$phosphate))+ geom_point() + theme_classic()
+ggMarginal(p, a, type = "histogram", yparams=list(colour="orange"))
+
+
+```
+
+
