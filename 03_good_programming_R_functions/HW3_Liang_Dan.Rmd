@@ -1,0 +1,162 @@
+---
+title: "HW3_Liang_Dan"
+author: "Dan Liang"
+date: "9/16/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problem 4
+
+The guides introduces good coding style, which includes readable, can be modified, shared easily. I think a good coding style starts with a clear logic of program, and lies in the uniformity of code. And good coding style needs practice. 
+
+
+# Program 5
+
+
+The code above gave back many suggestions. Some of them suggests that the code needs to be clearer.
+
+# Program 6
+```{r,echo=FALSE}
+library(tidyverse)
+library(beeswarm)
+library(stargazer)
+library(data.table)
+library(knitr)
+library(lubridate)
+library(rmarkdown)
+library(dplyr)
+library(tidyr)
+library(stargazer)
+library(lintr) 
+knitr::opts_chunk$set(echo = TRUE)
+
+
+datasummary <- function (dev1,dev2){
+  m1 <-mean(dev1)
+  m2 <-mean(dev2)
+  sd1<-sd(dev1)
+  sd2<-sd(dev2)
+  cov12<- cov(dev1, dev2)/sd1/sd2
+  result <- data.frame(Mean1 = m1, Std1 = sd1, Mean2 = m2, Std2 = sd2, Corr = cov12)
+  return (result)
+}
+
+LoadData <- readRDS ('HW3_data.rds')
+
+   Observer <- NULL
+   Mean1 <- NULL
+   STD1 <- NULL
+   Mean2 <- NULL
+   STD2 <- NULL
+   Correlation <- NULL
+
+for (i in 1:13){
+    Obs <- subset(LoadData,LoadData$Observer == i)
+    statresult <- datasummary(Obs$dev1,Obs$dev2)
+    Observer <- rbind(Observer, i)
+    Mean1 <- rbind(Mean1, statresult$Mean1)
+    STD1 <- rbind(STD1,statresult$Std1)
+    Mean2 <- rbind(Mean2,statresult$Mean2)
+    STD2 <- rbind(STD2,statresult$Std2)
+    Correlation <- rbind(Correlation,statresult$Corr)
+}
+
+OutputResult <- data.frame(Observer = Observer, Mean1 = Mean1, Std1 = STD1, Mean2 = Mean2, 
+                        Std2 = STD2, Cov = Correlation)
+
+knitr::kable(OutputResult, caption="Data set Summary")
+
+# create boxplot mean1  
+boxplot(OutputResult$Mean1,
+            main= toupper("Mean1 Boxplot"), 
+            xlab="Dev1", ylab="Mean")
+# create boxplot mean2
+boxplot(OutputResult$Mean2,
+            main= toupper("Mean2 Boxplot"), 
+            xlab="Dev2", ylab="Mean")
+
+ #create volin plot sd from dev1
+library (vioplot)
+library (sm)
+
+x1 <- OutputResult$Std1
+vioplot(x1, names=c("STD1"), 
+   col="green")
+title("STD1 Violin Plot")
+
+#create volin plot sd from dev2
+library(vioplot)
+library(sm)
+
+x2 <- OutputResult$Std2
+vioplot(x2, names=c("STD2"), 
+   col="green")
+title("STD2 Violin Plot")
+ 
+```
+
+
+# Problem 7
+
+
+```{r}
+# url<-"http://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/BloodPressure.dat"
+# the url link can not be assessed, data set can not be found
+# BloodPressure<-read.table(url, header=T, skip=1, fill=T, stringsAsFactors = F)
+# colnames(BloodPressure)<-c("Day",paste("Device",1:3,sep="_"),"Day2",paste("Doctor",1:3,sep="_"))
+# BloodPressurecleaned <- select(BloodPressure,-Day2) %>%gather(Approach,Value,Device_1:Doctor_3) %>% arrange(Day)
+
+# knitr::kable(summary(BloodPressurecleaned), caption="Blood Pressure summary")
+```
+
+Data link is broken, can not be assessed, the data cannot be find, the code has listed above.
+
+# Problem 8
+
+```{r,echo=FALSE}
+fx <- function(x){
+    y <- 3^x - sin(x) + cos(5*x)
+    return(y)
+}
+
+fx_deri <- function(x){
+    y <- log(3)*3^x - cos(x) - 5*cos(5*x)
+    return(y)
+}
+
+x <- 0:1000/1000
+y <- fx(x)
+plot(x,y)
+
+func <- function(Min,Max,Tolerance){
+    set.seed(1)
+    InitValue <- runif(1,min=Min,max=Max)
+    tolerance <- Tolerance
+    error <- 1
+    X1 <- InitValue
+    while (error > tolerance){
+        X2 <- X1 - fx(X1)/fx_deri(X1)/100
+        error <- abs(X2-X1)
+        X1 <- X2
+    }
+    return(X2)
+    
+answer <- func (0,1,0.001)
+answer
+}
+```
+
+
+
+
+            
+
+
+
+
+
+
